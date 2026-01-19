@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import type { Metadata } from 'next'
-import { getArticleBySlug, sampleArticles } from '@/lib/data/articles'
+import { getArticleBySlug, getAllArticles } from '@/lib/data/articles'
 import { formatDate } from '@/lib/utils/date'
 import NewsletterCTA from '@/components/sections/NewsletterCTA'
 import FeatureStartupCTA from '@/components/sections/FeatureStartupCTA'

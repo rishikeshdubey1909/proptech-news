@@ -1,6 +1,15 @@
 # PropTech News & Intelligence Platform
 
-A fast, SEO-first, content-heavy media site built with Next.js (App Router), Tailwind CSS, and designed for headless CMS integration.
+A fast, SEO-first, content-heavy media site built with Next.js (App Router), Tailwind CSS, and headless WordPress CMS integration.
+
+## 🚀 Features
+
+- **Premium Editorial Design** - Bloomberg/TechCrunch-style layout
+- **SEO Optimized** - Meta tags, schema markup, Open Graph
+- **Headless WordPress** - GraphQL and REST API ready
+- **Conversion Focused** - Newsletter signups, startup features, job postings
+- **Mobile First** - Responsive, fast-loading design
+- **Performance** - Optimized images, caching, Core Web Vitals friendly
 
 ## Tech Stack
 
