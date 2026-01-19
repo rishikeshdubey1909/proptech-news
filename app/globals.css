@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-inter: system-ui, -apple-system, sans-serif;
+    --font-playfair: Georgia, serif;
+    --font-mono: 'Courier New', monospace;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-white text-neutral-900 antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+    @apply font-bold;
+  }
+
+  /* Smooth scrolling for better UX */
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .prose {
+    @apply max-w-3xl mx-auto;
+  }
+
+  .prose h2 {
+    @apply text-2xl font-serif font-bold mt-8 mb-4 text-neutral-900;
+  }
+
+  .prose h3 {
+    @apply text-xl font-serif font-semibold mt-6 mb-3 text-neutral-900;
+  }
+
+  .prose p {
+    @apply text-neutral-700 leading-relaxed mb-4;
+  }
+
+  .prose a {
+    @apply text-primary-600 hover:text-primary-700 underline;
+  }
+
+  .prose ul, .prose ol {
+    @apply mb-4 pl-6;
+  }
+
+  .prose li {
+    @apply mb-2 text-neutral-700;
+  }
+
+  .prose strong {
+    @apply font-semibold text-neutral-900;
+  }
+}

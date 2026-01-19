@@ -1,0 +1,13 @@
+// Backup of original page
+export default function HomePageSimple() {
+  return (
+    <div style={{ padding: '40px', background: 'white', minHeight: '100vh' }}>
+      <h1 style={{ color: '#000', fontSize: '32px', marginBottom: '20px' }}>
+        PropTech News
+      </h1>
+      <p style={{ color: '#333', fontSize: '18px' }}>
+        If you can see this, the site is working!
+      </p>
+    </div>
+  )
+}

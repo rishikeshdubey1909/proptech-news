@@ -1,0 +1,320 @@
+{
+  "acf_field_groups": {
+    "article_metadata": {
+      "title": "Article Metadata",
+      "location": [
+        {
+          "param": "post_type",
+          "operator": "==",
+          "value": "article"
+        }
+      ],
+      "fields": [
+        {
+          "key": "field_article_type",
+          "label": "Article Type",
+          "name": "article_type",
+          "type": "select",
+          "choices": {
+            "news": "News",
+            "analysis": "Analysis",
+            "sponsored": "Sponsored"
+          },
+          "default_value": "news",
+          "required": 1
+        },
+        {
+          "key": "field_short_summary",
+          "label": "Short Summary",
+          "name": "short_summary",
+          "type": "textarea",
+          "instructions": "150-200 characters for listings and SEO",
+          "maxlength": 200,
+          "rows": 3,
+          "required": 1
+        },
+        {
+          "key": "field_source_attribution",
+          "label": "Source Attribution",
+          "name": "source_attribution",
+          "type": "group",
+          "sub_fields": [
+            {
+              "key": "field_source_url",
+              "label": "Source URL",
+              "name": "source_url",
+              "type": "url"
+            },
+            {
+              "key": "field_source_publisher",
+              "label": "Source Publisher",
+              "name": "source_publisher",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "key": "field_geography",
+          "label": "Geography",
+          "name": "geography",
+          "type": "taxonomy",
+          "taxonomy": "geography",
+          "field_type": "select",
+          "return_format": "id"
+        },
+        {
+          "key": "field_companies",
+          "label": "Companies / Startups",
+          "name": "companies",
+          "type": "repeater",
+          "sub_fields": [
+            {
+              "key": "field_company_name",
+              "label": "Company Name",
+              "name": "company_name",
+              "type": "text",
+              "required": 1
+            },
+            {
+              "key": "field_company_url",
+              "label": "Company URL",
+              "name": "company_url",
+              "type": "url"
+            }
+          ]
+        },
+        {
+          "key": "field_featured",
+          "label": "Featured",
+          "name": "featured",
+          "type": "true_false",
+          "default_value": 0,
+          "ui": 1
+        },
+        {
+          "key": "field_read_time",
+          "label": "Read Time (minutes)",
+          "name": "read_time",
+          "type": "number",
+          "instructions": "Estimated reading time in minutes",
+          "default_value": 5,
+          "min": 1,
+          "max": 60
+        },
+        {
+          "key": "field_cta_type",
+          "label": "CTA Type",
+          "name": "cta_type",
+          "type": "select",
+          "choices": {
+            "newsletter": "Newsletter Signup",
+            "feature_startup": "Feature Your Startup",
+            "none": "None"
+          },
+          "default_value": "newsletter"
+        },
+        {
+          "key": "field_sponsored_disclosure",
+          "label": "Sponsored Disclosure",
+          "name": "sponsored_disclosure",
+          "type": "true_false",
+          "instructions": "Show sponsored content disclosure",
+          "default_value": 0,
+          "ui": 1
+        }
+      ]
+    },
+    "founder_interview_metadata": {
+      "title": "Founder Interview Metadata",
+      "location": [
+        {
+          "param": "post_type",
+          "operator": "==",
+          "value": "founder_interview"
+        }
+      ],
+      "fields": [
+        {
+          "key": "field_founder_name",
+          "label": "Founder Name",
+          "name": "founder_name",
+          "type": "text",
+          "required": 1
+        },
+        {
+          "key": "field_company_name",
+          "label": "Company Name",
+          "name": "company_name",
+          "type": "text",
+          "required": 1
+        },
+        {
+          "key": "field_founder_photo",
+          "label": "Founder Photo",
+          "name": "founder_photo",
+          "type": "image",
+          "return_format": "array",
+          "preview_size": "thumbnail"
+        },
+        {
+          "key": "field_linkedin_url",
+          "label": "LinkedIn URL",
+          "name": "linkedin_url",
+          "type": "url"
+        },
+        {
+          "key": "field_twitter_handle",
+          "label": "Twitter Handle",
+          "name": "twitter_handle",
+          "type": "text"
+        }
+      ]
+    },
+    "sponsored_story_metadata": {
+      "title": "Sponsored Story Metadata",
+      "location": [
+        {
+          "param": "post_type",
+          "operator": "==",
+          "value": "sponsored_story"
+        }
+      ],
+      "fields": [
+        {
+          "key": "field_sponsor_name",
+          "label": "Sponsor Name",
+          "name": "sponsor_name",
+          "type": "text",
+          "required": 1
+        },
+        {
+          "key": "field_sponsor_logo",
+          "label": "Sponsor Logo",
+          "name": "sponsor_logo",
+          "type": "image",
+          "return_format": "array"
+        },
+        {
+          "key": "field_sponsor_url",
+          "label": "Sponsor URL",
+          "name": "sponsor_url",
+          "type": "url"
+        },
+        {
+          "key": "field_disclosure_text",
+          "label": "Disclosure Text",
+          "name": "disclosure_text",
+          "type": "textarea",
+          "default_value": "This is a sponsored post."
+        }
+      ]
+    },
+    "report_metadata": {
+      "title": "Report Metadata",
+      "location": [
+        {
+          "param": "post_type",
+          "operator": "==",
+          "value": "report"
+        }
+      ],
+      "fields": [
+        {
+          "key": "field_report_type",
+          "label": "Report Type",
+          "name": "report_type",
+          "type": "select",
+          "choices": {
+            "quarterly_funding": "Quarterly Funding Report",
+            "market_analysis": "Market Analysis",
+            "industry_trends": "Industry Trends"
+          },
+          "required": 1
+        },
+        {
+          "key": "field_report_pdf",
+          "label": "Report PDF",
+          "name": "report_pdf",
+          "type": "file",
+          "return_format": "array",
+          "mime_types": "pdf"
+        },
+        {
+          "key": "field_report_date",
+          "label": "Report Date",
+          "name": "report_date",
+          "type": "date_picker",
+          "display_format": "F j, Y",
+          "return_format": "Y-m-d"
+        },
+        {
+          "key": "field_key_findings",
+          "label": "Key Findings",
+          "name": "key_findings",
+          "type": "textarea",
+          "rows": 5
+        }
+      ]
+    },
+    "job_metadata": {
+      "title": "Job Metadata",
+      "location": [
+        {
+          "param": "post_type",
+          "operator": "==",
+          "value": "job"
+        }
+      ],
+      "fields": [
+        {
+          "key": "field_job_company_name",
+          "label": "Company Name",
+          "name": "company_name",
+          "type": "text",
+          "required": 1
+        },
+        {
+          "key": "field_job_type",
+          "label": "Job Type",
+          "name": "job_type",
+          "type": "select",
+          "choices": {
+            "full_time": "Full-Time",
+            "part_time": "Part-Time",
+            "contract": "Contract",
+            "internship": "Internship"
+          },
+          "required": 1
+        },
+        {
+          "key": "field_job_location",
+          "label": "Location",
+          "name": "location",
+          "type": "text",
+          "instructions": "e.g., San Francisco, CA or Remote"
+        },
+        {
+          "key": "field_application_url",
+          "label": "Application URL",
+          "name": "application_url",
+          "type": "url",
+          "required": 1
+        },
+        {
+          "key": "field_salary_range",
+          "label": "Salary Range",
+          "name": "salary_range",
+          "type": "text"
+        },
+        {
+          "key": "field_remote",
+          "label": "Remote",
+          "name": "remote",
+          "type": "true_false",
+          "default_value": 0,
+          "ui": 1
+        }
+      ]
+    }
+  }
+}
