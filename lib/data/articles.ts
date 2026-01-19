@@ -1,5 +1,6 @@
 import { Article, Category } from '../types'
 import { wordpressService } from '../services/wordpress'
+import { graphqlService } from '../services/graphql'
 
 // Fallback sample data
 export const categories: Record<Category, { name: string; description: string }> = {
@@ -174,7 +175,7 @@ export const sampleArticles: Article[] = [
  * Check if WordPress is configured
  */
 function isWordPressConfigured(): boolean {
-  return !!process.env.NEXT_PUBLIC_WORDPRESS_API_URL
+  return !!(process.env.NEXT_PUBLIC_WORDPRESS_API_URL || process.env.NEXT_PUBLIC_WORDPRESS_GRAPHQL_URL)
 }
 
 /**
@@ -182,8 +183,14 @@ function isWordPressConfigured(): boolean {
  */
 export async function getArticleBySlug(slug: string): Promise<Article | undefined> {
   if (isWordPressConfigured()) {
-    const article = await wordpressService.getArticleBySlug(slug)
-    return article || undefined
+    // Prefer GraphQL if configured, otherwise use REST API
+    if (process.env.NEXT_PUBLIC_WORDPRESS_GRAPHQL_URL) {
+      const article = await graphqlService.getArticleBySlug(slug)
+      return article || undefined
+    } else {
+      const article = await wordpressService.getArticleBySlug(slug)
+      return article || undefined
+    }
   }
   return sampleArticles.find(article => article.slug === slug)
 }
@@ -193,7 +200,12 @@ export async function getArticleBySlug(slug: string): Promise<Article | undefine
  */
 export async function getArticlesByCategory(category: Category): Promise<Article[]> {
   if (isWordPressConfigured()) {
-    return wordpressService.getArticlesByCategory(category)
+    // Prefer GraphQL if configured, otherwise use REST API
+    if (process.env.NEXT_PUBLIC_WORDPRESS_GRAPHQL_URL) {
+      return graphqlService.getArticlesByCategory(category)
+    } else {
+      return wordpressService.getArticlesByCategory(category)
+    }
   }
   return sampleArticles.filter(article => article.category === category)
 }
@@ -203,7 +215,12 @@ export async function getArticlesByCategory(category: Category): Promise<Article
  */
 export async function getFeaturedArticles(): Promise<Article[]> {
   if (isWordPressConfigured()) {
-    return wordpressService.getFeaturedArticles()
+    // Prefer GraphQL if configured, otherwise use REST API
+    if (process.env.NEXT_PUBLIC_WORDPRESS_GRAPHQL_URL) {
+      return graphqlService.getFeaturedArticles()
+    } else {
+      return wordpressService.getFeaturedArticles()
+    }
   }
   return sampleArticles.filter(article => article.featured)
 }
@@ -213,7 +230,12 @@ export async function getFeaturedArticles(): Promise<Article[]> {
  */
 export async function getLatestArticles(limit?: number): Promise<Article[]> {
   if (isWordPressConfigured()) {
-    return wordpressService.getLatestArticles(limit)
+    // Prefer GraphQL if configured, otherwise use REST API
+    if (process.env.NEXT_PUBLIC_WORDPRESS_GRAPHQL_URL) {
+      return graphqlService.getLatestArticles(limit)
+    } else {
+      return wordpressService.getLatestArticles(limit)
+    }
   }
   const sorted = [...sampleArticles].sort((a, b) => 
     new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
@@ -226,7 +248,12 @@ export async function getLatestArticles(limit?: number): Promise<Article[]> {
  */
 export async function getAllArticles(): Promise<Article[]> {
   if (isWordPressConfigured()) {
-    return wordpressService.getArticles()
+    // Prefer GraphQL if configured, otherwise use REST API
+    if (process.env.NEXT_PUBLIC_WORDPRESS_GRAPHQL_URL) {
+      return graphqlService.getAllArticles()
+    } else {
+      return wordpressService.getArticles()
+    }
   }
   return sampleArticles
 }
