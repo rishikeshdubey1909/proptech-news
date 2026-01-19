@@ -1,0 +1,17 @@
+# Dockerfile for WordPress on Render
+# Use this if you want to customize WordPress installation
+
+FROM wordpress:latest
+
+# Install additional PHP extensions if needed
+RUN apt-get update && apt-get install -y \
+    && docker-php-ext-install mysqli pdo pdo_mysql \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy headless WordPress configuration
+COPY wordpress/functions.php /usr/src/wordpress/wp-content/themes/headless/functions.php
+
+# Set permissions
+RUN chown -R www-data:www-data /var/www/html
+
+WORKDIR /var/www/html

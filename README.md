@@ -51,3 +51,23 @@ Open [http://localhost:3000](http://localhost:3000) to see the site.
 - Category-based content organization
 - Newsletter integration ready
 - Monetization pages (Ads, Featured Startups, Jobs)
+- Headless WordPress CMS integration (REST API + GraphQL)
+
+## Deployment on Render
+
+### Environment Variables
+
+Add these in Render Dashboard → Environment:
+
+```env
+NEXT_PUBLIC_WORDPRESS_GRAPHQL_URL=https://yourwordpresssite.com/graphql
+```
+
+Or for REST API:
+
+```env
+NEXT_PUBLIC_WORDPRESS_API_URL=https://yourwordpresssite.com
+NEXT_PUBLIC_WORDPRESS_POST_TYPE=posts
+```
+
+See `RENDER_WORDPRESS_SETUP.md` for complete setup guide.
