@@ -1,22 +1,23 @@
 version: '3.8'
 
 services:
-  # Next.js Frontend
-  nextjs:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
+  # MySQL Database
+  db:
+    image: mysql:8.0
     environment:
-      - NEXT_PUBLIC_WORDPRESS_GRAPHQL_URL=http://wordpress/graphql
-    depends_on:
-      - wordpress
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress123
+      MYSQL_ROOT_PASSWORD: rootpassword123
     volumes:
-      - .:/app
-      - /app/node_modules
-      - /app/.next
+      - db_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
 
   # WordPress CMS
   wordpress:
@@ -28,25 +29,33 @@ services:
       WORDPRESS_DB_USER: wordpress
       WORDPRESS_DB_PASSWORD: wordpress123
       WORDPRESS_DB_NAME: wordpress
-      WORDPRESS_DEBUG: 0
+      WORDPRESS_DEBUG: 1
+      WORDPRESS_CONFIG_EXTRA: |
+        define('WP_USE_THEMES', false);
+        define('REST_API_ALLOW_ORIGIN', '*');
     volumes:
       - wordpress_data:/var/www/html
-      - ./wordpress/wp-config.php:/var/www/html/wp-config.php:ro
-      - ./wordpress/functions-single-host.php:/var/www/html/wp-content/themes/headless/functions.php:ro
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     restart: unless-stopped
 
-  # MySQL Database
-  db:
-    image: mysql:8.0
+  # Next.js Frontend
+  nextjs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
     environment:
-      MYSQL_DATABASE: wordpress
-      MYSQL_USER: wordpress
-      MYSQL_PASSWORD: wordpress123
-      MYSQL_ROOT_PASSWORD: rootpassword123
+      - NEXT_PUBLIC_WORDPRESS_GRAPHQL_URL=http://wordpress/graphql
+      - NODE_ENV=production
+    depends_on:
+      - wordpress
     volumes:
-      - db_data:/var/lib/mysql
+      - .:/app
+      - /app/node_modules
+      - /app/.next
     restart: unless-stopped
 
 volumes:
